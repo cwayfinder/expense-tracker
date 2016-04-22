@@ -11,10 +11,13 @@ app.run(function($rootScope, $location) {
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/home', {
-      template: '<home></home>',
+      template: '<home expenses-in-order="$resolve.expensesInOrder"></home>',
       resolve: {
-        currentAuth: function(auth) {
-          return auth.$requireAuth();
+        expensesInOrder: function(fbRef, $firebaseArray, auth) {
+          return auth.$requireAuth().then(function() {
+            var query = fbRef.getExpensesRef().orderByChild('date')
+            return $firebaseArray(query).$loaded();
+          });
         }
       }
     })

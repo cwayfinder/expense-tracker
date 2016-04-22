@@ -5,6 +5,9 @@ angular.module('app').factory('fbRef', function(rootRef, auth) {
     },
     getCategoriesRef: function() {
       return rootRef.child('categories');
+    },
+    getExpensesRef: function() {
+      return rootRef.child('expenses').child(auth.$getAuth().uid);
     }
   }
 })
