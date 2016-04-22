@@ -4,6 +4,9 @@ angular.module('app').component('categoryList', {
     categories: '='
   },
   controller: function() {
-
+    this.createNewCategory = function() {
+      this.categories.$add({ name: this.newCategoryName});
+      this.newCategoryName = '';
+    }
   }
 });
