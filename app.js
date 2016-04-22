@@ -28,6 +28,17 @@ app.config(function ($routeProvider) {
         }
       }
     })
+    .when('/categories', {
+      template: '<category-list categories="$resolve.categories"></category-list>',
+      resolve: {
+        categories: function(fbRef, $firebaseArray, auth) {
+          return auth.$requireAuth().then(function() {
+            var query = fbRef.getCategoriesRef().orderByChild('name')
+            return $firebaseArray(query).$loaded();
+          });
+        }
+      }
+    })
     .when('/login', {
       template: '<login current-auth="$resolve.currentAuth"></login>',
       resolve: {
