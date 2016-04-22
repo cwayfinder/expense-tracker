@@ -7,13 +7,21 @@
   <th width="10%"></th>
   </thead>
   <tbody>
-  <tr ng-repeat="expense in $ctrl.expenses">
+  <tr ng-repeat="expense in $ctrl.expenses"
+      ng-mouseenter="hovering = true"
+      ng-mouseleave="hovering = false">
     <td>{{expense.date | date:'shortDate'}}</td>
     <td>{{expense.payee}}</td>
     <td>{{expense.description}}</td>
     <td>{{expense.category.name}}</td>
     <td>{{expense.amount | currency}}</td>
-    <td>&nbsp;</td>
+    <td>
+      <span ng-show="hovering" class="glyphicon glyphicon-remove"
+            ng-mouseenter="delhovering = true"
+            ng-mouseleave="delhovering = false"
+            ng-class="{'hover-delete':delhovering}"
+            ng-click="$ctrl.deleteExpense(expense)"></span>
+    </td>
   </tr>
   </tbody>
 </table>
