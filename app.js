@@ -13,10 +13,10 @@ app.config(function ($routeProvider) {
     .when('/home', {
       template: '<home expenses-in-order="$resolve.expensesInOrder"></home>',
       resolve: {
-        expensesInOrder: function(fbRef, $firebaseArray, auth) {
+        expensesInOrder: function(fbRef, expenseList, auth) {
           return auth.$requireAuth().then(function() {
             var query = fbRef.getExpensesRef().orderByChild('date')
-            return $firebaseArray(query).$loaded();
+            return expenseList(query).$loaded();
           });
         }
       }

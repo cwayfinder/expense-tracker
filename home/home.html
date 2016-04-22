@@ -1,4 +1,4 @@
 <nav></nav>
-<h1>Expenses</h1>
+<h1>Expenses <small>{{$ctrl.expensesInOrder.getTotal() | currency}}</small></h1>
 
 <expense-list-display expense-date="$ctrl.expensesInOrder"></expense-list-display>
