@@ -1,7 +1,8 @@
 angular.module('app').component('home', {
   templateUrl: '/home/home.html',
   bindings: {
-    expensesInOrder: '='
+    expensesInOrder: '=',
+    categories: '='
   },
   controller: function (rootRef) {
     rootRef.on('value', function () {

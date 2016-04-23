@@ -1,0 +1,12 @@
+<form class="form-inline">
+  <input type="text" class="form-control" placeholder="Date" ng-model="$ctrl.date">
+  <input type="text" class="form-control" placeholder="Payee" ng-model="$ctrl.payee">
+  <input type="text" class="form-control" placeholder="Description" ng-model="$ctrl.desc">
+
+  <select class="form-control" ng-model="$ctrl.selectedCategory"
+          ng-options="category.name for category in $ctrl.categories track by category.$id"></select>
+
+  <input type="text" class="form-control" placeholder="Amount" ng-model="$ctrl.amount">
+
+  <button class="btn btn-primary btn-sm" ng-click="$ctrl.create()">Create</button>
+</form>

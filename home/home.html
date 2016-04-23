@@ -2,3 +2,5 @@
 <h1>Expenses <small>{{$ctrl.expensesInOrder.getTotal() | currency}}</small></h1>
 
 <expense-list-display expense-date="$ctrl.expensesInOrder"></expense-list-display>
+
+<edit-expense categories="$ctrl.categories"></edit-expense>

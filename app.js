@@ -11,12 +11,19 @@ app.run(function($rootScope, $location) {
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/home', {
-      template: '<home expenses-in-order="$resolve.expensesInOrder"></home>',
+      template: '<home categories="$resolve.categories" ' +
+                      'expenses-in-order="$resolve.expensesInOrder"></home>',
       resolve: {
         expensesInOrder: function(fbRef, expenseList, auth) {
           return auth.$requireAuth().then(function() {
             var query = fbRef.getExpensesRef().orderByChild('date')
             return expenseList(query).$loaded();
+          });
+        },
+        categories: function(fbRef, $firebaseArray, auth) {
+          return auth.$requireAuth().then(function() {
+            var query = fbRef.getCategoriesRef().orderByChild('name')
+            return $firebaseArray(query).$loaded();
           });
         }
       }
