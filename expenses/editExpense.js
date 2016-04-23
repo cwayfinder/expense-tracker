@@ -2,9 +2,41 @@ angular.module('app').component('editExpense', {
   templateUrl: '/expenses/editExpense.html',
   bindings: {
     categories: '=',
-    createNewExpense: '&'
+    createNewExpense: '&',
+    updateExpense: '&',
+    editedExpense: '='
   },
-  controller: function() {
+  controller: function($scope) {
+    $scope.$watch('$ctrl.editedExpense', (newData) => {
+      if (!!newData) {
+      this.editing = true;
+        this.amount = newData.amount;
+        this.desc = newData.description;
+        this.date = new Date(newData.date).toLocaleDateString();
+        this.selectedCategory = this.categories[this.categories.$indexFor(newData.category.id)];
+        this.payee = newData.payee;
+      }
+    });
+
+    this.save = function() {
+      this.editedExpense.amount = parseFloat(this.amount);
+      this.editedExpense.description = this.desc;
+      this.editedExpense.payee = this.payee;
+      this.editedExpense.date = new Date(this.date).toJSON();
+      this.editedExpense.category = {name: this.selectedCategory.name, id: this.selectedCategory.$id};
+
+      this.updateExpense();
+      this.setDefaults();
+      this.editing = false;
+      this.editedExpense = null;
+    };
+
+    this.cancel = function() {
+      this.setDefaults();
+      this.editing = false;
+      this.editedExpense = null;
+    };
+
     this.setDefaults = function() {
       this.amount = '';
       this.desc = '';

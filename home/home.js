@@ -11,6 +11,14 @@ angular.module('app').component('home', {
 
     this.createExpense = function(expenseData) {
       this.expensesInOrder.$add(expenseData);
+    };
+
+    this.editExpense = function(expense) {
+      this.editedExpense = expense;
+    }
+
+    this.updateExpense = function() {
+      this.expensesInOrder.$save(this.editedExpense);
     }
   }
 });
