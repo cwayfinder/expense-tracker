@@ -1,6 +1,6 @@
 <nav></nav>
 <h1>Expenses <small>{{$ctrl.expensesInOrder.getTotal() | currency}}</small></h1>
 
-<expense-list-display expense-date="$ctrl.expensesInOrder"></expense-list-display>
+<expense-list-display expense-data="$ctrl.expensesInOrder"></expense-list-display>
 
-<edit-expense categories="$ctrl.categories"></edit-expense>
+<edit-expense categories="$ctrl.categories" create-new-expense="$ctrl.createExpense(expenseData)"></edit-expense>
